@@ -6,8 +6,39 @@ using namespace std;
 
 bool isBalanced(string s)
 {
-	// replace the body of this function 
-	return true;
+	bool isBalanced = true;
+
+	vector<char> vec;
+
+	for (int i = 0; i < s.size(); i++)
+	{
+		if (s[i] == '(')
+		{
+			vec.push_back(s[i]);
+		}
+		else if (s[i] == ')')
+		{
+			if (vec.size() > 0)
+			{
+				vec.pop_back();
+			}
+			else
+			{
+				isBalanced = false;
+			}
+				
+		}
+
+
+	}
+
+
+	if (vec.size() != 0)
+	{
+		isBalanced = false;
+	}
+
+	return isBalanced;
 }
 
 int main()
