@@ -4,54 +4,58 @@
 #include <vector>
 using namespace std;
 
-bool isBalanced(string s)
+
+bool isBalanced(string ourstring)
 {
-	bool isBalanced = true;
-
-	vector<char> vec;
-
-	for (int i = 0; i < s.size(); i++)
+	vector <char> vec;
+	bool balanced = true; //assume it is true
+	for (int i = 0; i < ourstring.size(); i++)
 	{
-		if (s[i] == '(')
+		if (ourstring[i] == '(')
 		{
-			vec.push_back(s[i]);
+			vec.push_back(ourstring[i]); //pushing the vector if the ( is is there
 		}
-		else if (s[i] == ')')
+		else if (ourstring[i] == ')')
 		{
-			if (vec.size() > 0)
+			if (vec.size() > 0) //we cant pop an empty stack
 			{
-				vec.pop_back();
+				vec.pop_back(); //popping the ( if we run into a )
 			}
 			else
 			{
-				isBalanced = false;
+				balanced = false; 
 			}
-				
 		}
-
-
 	}
-
 
 	if (vec.size() != 0)
 	{
-		isBalanced = false;
+		balanced = false;
 	}
 
-	return isBalanced;
+
+	return balanced;
 }
 
 int main()
 {
 	ifstream file;
 	file.open("balancedTestCases.txt");
-	string s;
-	while (getline(file, s))
+	string ourstring;
+
+	while (getline(file, ourstring))
 	{
-		if (isBalanced(s))
-			cout << s << " is balanced." << endl;
+		if (isBalanced(ourstring) == true)
+		{
+			cout << ourstring << " is balanced" << endl;
+		}
 		else
-			cout << s << " is not balanced. " << endl;
+		{
+			cout << ourstring << " is not balanced" << endl;
+		}
+
 	}
+
+
 
 }
